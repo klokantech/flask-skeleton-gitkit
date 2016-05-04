@@ -1,0 +1,3 @@
+graft skeleton/migrations
+graft skeleton/static
+graft skeleton/templates

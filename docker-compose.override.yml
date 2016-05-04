@@ -1,0 +1,19 @@
+version: "2"
+
+services:
+  app:
+    build:
+      context: ./app
+      args:
+        - PACKAGE_NAME=$PACKAGE_NAME
+        - PACKAGE_VERSION=$PACKAGE_VERSION
+        - SETUP_MODE=development
+    command: /venv/bin/python -m $PACKAGE_NAME runserver
+    volumes:
+      - ./app/$PACKAGE_NAME:/venv/app/$PACKAGE_NAME
+    ports:
+      - "8000:8000"
+    environment:
+      - FLASK_DEBUG=true
+      - FLASK_DEVELOPMENT=true
+      - FLASK_SECRET_KEY="<<< Development key >>>"

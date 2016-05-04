@@ -1,0 +1,49 @@
+source config
+
+development () {
+    docker-compose \
+        -p "${PROJECT_NAME}-development" \
+        -f docker-compose.yml \
+        -f docker-compose.override.yml \
+        "$@"
+}
+
+release () {
+    docker-compose \
+        -p "${PROJECT_NAME}-release" \
+        -f docker-compose.yml \
+        -f docker-compose.release.yml \
+        "$@"
+}
+
+production () {
+    docker-compose \
+        -p "${PROJECT_NAME}-production" \
+        -f docker-compose.yml \
+        -f docker-compose.production.yml \
+        "$@"
+}
+
+manage () {
+    development run --rm -e SQLALCHEMY_ECHO=false app \
+        /venv/bin/python -m $PACKAGE_NAME "$@"
+}
+
+deactivate () {
+    unset -f development
+    unset -f release
+    unset -f production
+    unset -f manage
+    unset -f deactivate
+    PS1="$_OLD_PS1"
+    export PS1
+    unset _OLD_PS1
+    unset PACKAGE_NAME
+    unset PACKAGE_VERSION
+}
+
+_OLD_PS1="$PS1"
+PS1="($PACKAGE_NAME)$PS1"
+export PACKAGE_NAME
+export PACKAGE_VERSION
+export PS1
