@@ -23,7 +23,9 @@ def signed_in():
     if token is None:
         abort(400)
     gitkit_account = gitkit.get_account_by_id(token['id'])
-    account = Account.query.get(token['id'])
+    account = Account.query.filter_by(gitkit_id=token['id']).one_or_none()
+    if account is None:
+        account = Account.query.filter_by(email=token['email']).one_or_none()
     if account is None:
         account = Account(id=token['id'])
         db.session.add(account)
