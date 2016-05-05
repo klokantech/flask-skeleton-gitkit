@@ -2,10 +2,12 @@
 
 ```shell
 $ source activate
-$ manage db upgrade
-$ development up
+$ dev build
+$ dev manage db upgrade
+$ dev up
 ^C
-$ release build
+$ production build
+$ production manage export_static /mnt/static
 $ production up
 ```
 

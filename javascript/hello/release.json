@@ -1,0 +1,9 @@
+{
+  "id": "hello",
+  "inherits": "base.json",
+  "inputs": ["src/hello.js"],
+  "paths": ["src"],
+  "define": {
+    "goog.DEBUG": false
+  }
+}

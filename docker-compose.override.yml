@@ -16,3 +16,11 @@ services:
       - FLASK_DEBUG=true
       - FLASK_DEVELOPMENT=true
       - FLASK_SECRET_KEY="<<< Development key >>>"
+  javascript:
+    image: klokantech/plovr:5.0.1
+    command: make serve
+    volumes:
+      - ./javascript:/data
+      - ./app/skeleton/static/js:/mnt  # __NAME__
+    ports:
+      - "9810:9810"
