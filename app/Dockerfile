@@ -3,9 +3,6 @@ ENV DEBIAN_FRONTEND noninteractive
 
 EXPOSE 8000
 
-# Uncomment if you need an entrypoint.
-# ENTRYPOINT ["/venv/entrypoint.sh"]
-
 RUN apt-get -qq update && apt-get -qq -y --no-install-recommends install \
     build-essential \
     ca-certificates \
@@ -20,9 +17,6 @@ COPY requirements.txt /venv/requirements.txt
 RUN python3 -m venv /venv \
 && /venv/bin/pip install -r /venv/requirements.txt \
 && /venv/bin/pip freeze > /venv/requirements-freezed.txt
-
-# Uncomment if you need an entrypoint.
-# COPY entrypoint.sh /venv/entrypoint.sh
 
 ARG PACKAGE_NAME
 ARG PACKAGE_VERSION
