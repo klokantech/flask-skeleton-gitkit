@@ -14,6 +14,14 @@ services:
     restart: always
     environment:
       - FLASK_SECRET_KEY="<<< Production key >>>"
+      - GITKIT_CLIENT_ID="<<< Client ID >>>"
+      - GITKIT_PROJECT_ID="<<< Project ID >>>"
+      - GITKIT_SERVICE_ACCOUNT_EMAIL="<<< Service account email >>>"
+      - |
+        GITKIT_SERVICE_ACCOUNT_KEY=-----BEGIN PRIVATE KEY-----
+        Insert the encoded private key here. The '|' above is intentional.
+        This is how you do big blocks of text in YAML.
+        -----END PRIVATE KEY-----
   nginx:
     image: klokantech/nginx
     ports:

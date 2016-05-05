@@ -6,8 +6,4 @@ services:
     volumes:
       - ./data:/mnt
     environment:
-      - GITKIT_CLIENT_ID=
-      - GITKIT_PROJECT_ID=
-      - GITKIT_SERVICE_ACCOUNT_EMAIL=
-      - GITKIT_SERVICE_ACCOUNT_KEY=
       - SQLALCHEMY_DATABASE_URI=sqlite:////mnt/$PACKAGE_NAME.sqlite
