@@ -4,8 +4,9 @@
 $ source activate
 $ manage db upgrade
 $ development up
-^c
+^C
 $ release build
+$ production up
 ```
 
 Sample accounts:

@@ -1,7 +1,7 @@
 source config
 
 development () {
-    docker-compose \
+    SETUP_MODE=development docker-compose \
         -p "${PROJECT_NAME}-development" \
         -f docker-compose.yml \
         -f docker-compose.override.yml \
@@ -9,10 +9,11 @@ development () {
 }
 
 release () {
-    docker-compose \
-        -p "${PROJECT_NAME}-release" \
+    SETUP_MODE=release docker-compose \
+        -p "${PROJECT_NAME}-production" \
         -f docker-compose.yml \
-        -f docker-compose.release.yml \
+        -f docker-compose.override.yml \
+        -f docker-compose.production.yml \
         "$@"
 }
 

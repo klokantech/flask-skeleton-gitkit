@@ -7,7 +7,7 @@ services:
       args:
         - PACKAGE_NAME=$PACKAGE_NAME
         - PACKAGE_VERSION=$PACKAGE_VERSION
-        - SETUP_MODE=development
+        - SETUP_MODE=$SETUP_MODE
     command: /venv/bin/python -m $PACKAGE_NAME runserver
     volumes:
       - ./app/$PACKAGE_NAME:/venv/app/$PACKAGE_NAME
