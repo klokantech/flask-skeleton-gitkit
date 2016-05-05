@@ -2,8 +2,8 @@ version: "2"
 
 services:
   app:
-    working_dir: /venv/app/$PACKAGE_NAME
+    working_dir: /venv/app/skeleton  # __NAME__
     volumes:
       - ./data:/mnt
     environment:
-      - SQLALCHEMY_DATABASE_URI=sqlite:////mnt/$PACKAGE_NAME.sqlite
+      - SQLALCHEMY_DATABASE_URI=sqlite:////mnt/database.sqlite

@@ -2,15 +2,16 @@ version: "2"
 
 services:
   app:
-    image: "klokantech/$PACKAGE_NAME:$PACKAGE_VERSION"
-    container_name: com.klokantech.skeleton
+    image: klokantech/skeleton:$VERSION  # __NAME__
+    container_name: com.klokantech.skeleton  # __NAME__
+    # __NAME__
     command: >
         /venv/bin/uwsgi
         --master
         --uid nobody
         --enable-threads
         --socket 0.0.0.0:8000
-        --wsgi $PACKAGE_NAME:app
+        --wsgi skeleton:app
     restart: always
     environment:
       - FLASK_SECRET_KEY="<<< Production key >>>"
@@ -30,4 +31,4 @@ services:
       - app
     volumes:
       - ./nginx:/etc/nginx/conf.d
-      - ./data/static:/srv/com.klokantech.skeleton/static
+      - ./data/static:/srv/com.klokantech.skeleton/static  # __NAME__

@@ -7,7 +7,7 @@ from flask.ext.principal import Identity, Permission, PermissionDenied, Principa
 from ..model import Account, db
 
 
-app = Flask(os.environ['PACKAGE_NAME'])
+app = Flask('skeleton')  # __NAME__
 app.config.from_object('{}.settings'.format(app.import_name))
 
 babel = Babel(app)

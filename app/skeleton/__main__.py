@@ -3,7 +3,7 @@ from shutil import copytree
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script import Manager, Server, Shell
 
-from skeleton import app, db, model
+from skeleton import app, db, model  # __NAME__
 
 
 manager = Manager(app)

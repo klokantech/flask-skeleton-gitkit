@@ -1,16 +1,14 @@
-source config
+PACKAGE_NAME=skeleton  # __NAME__
 
 development () {
-    SETUP_MODE=development docker-compose \
-        -p "${PROJECT_NAME}-development" \
+    SETUP_MODE=development compose \
         -f docker-compose.yml \
         -f docker-compose.override.yml \
         "$@"
 }
 
 release () {
-    SETUP_MODE=release docker-compose \
-        -p "${PROJECT_NAME}-production" \
+    SETUP_MODE=release compose \
         -f docker-compose.yml \
         -f docker-compose.override.yml \
         -f docker-compose.production.yml \
@@ -18,8 +16,7 @@ release () {
 }
 
 production () {
-    docker-compose \
-        -p "${PROJECT_NAME}-production" \
+    compose \
         -f docker-compose.yml \
         -f docker-compose.production.yml \
         "$@"
@@ -30,21 +27,22 @@ manage () {
         /venv/bin/python -m $PACKAGE_NAME "$@"
 }
 
+compose () {
+    VERSION=$(cat VERSION) docker-compose "$@"
+}
+
 deactivate () {
     unset -f development
     unset -f release
     unset -f production
     unset -f manage
+    unset -f compose
     unset -f deactivate
     PS1="$_OLD_PS1"
     export PS1
     unset _OLD_PS1
-    unset PACKAGE_NAME
-    unset PACKAGE_VERSION
 }
 
 _OLD_PS1="$PS1"
 PS1="($PACKAGE_NAME)$PS1"
-export PACKAGE_NAME
-export PACKAGE_VERSION
 export PS1

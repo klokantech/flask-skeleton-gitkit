@@ -1,11 +1,14 @@
 #!/bin/sh
 set -e
 
-if [ "$1" = "development" ]; then
+export VERSION="$1"
+SETUP_MODE="$2"
+
+if [ "$SETUP_MODE" = "development" ]; then
     (cd /venv/app; /venv/bin/python setup.py develop)
-elif [ "$1" = "release" ]; then
+elif [ "$SETUP_MODE" = "release" ]; then
     (cd /venv/app; /venv/bin/python setup.py install)
 else
-    echo "Invalid setup mode: $1"
+    echo "Invalid setup mode: $SETUP_MODE"
     exit 1
 fi

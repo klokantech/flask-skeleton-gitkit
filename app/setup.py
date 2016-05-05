@@ -3,12 +3,11 @@
 import os
 import setuptools
 
-name = os.environ['PACKAGE_NAME']
-version = os.environ['PACKAGE_VERSION']
+name = 'skeleton'  # __NAME__
 
 setuptools.setup(
     name=name,
-    version=version,
+    version=os.environ['VERSION'],
     packages=setuptools.find_packages(),
     include_package_data=True,
     zip_safe=False,

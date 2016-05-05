@@ -5,12 +5,11 @@ services:
     build:
       context: ./app
       args:
-        - PACKAGE_NAME=$PACKAGE_NAME
-        - PACKAGE_VERSION=$PACKAGE_VERSION
+        - VERSION=$VERSION
         - SETUP_MODE=$SETUP_MODE
-    command: /venv/bin/python -m $PACKAGE_NAME runserver
+    command: /venv/bin/python -m skeleton runserver  # __NAME__
     volumes:
-      - ./app/$PACKAGE_NAME:/venv/app/$PACKAGE_NAME
+      - ./app/skeleton:/venv/app/skeleton  # __NAME__
     ports:
       - "8000:8000"
     environment:
