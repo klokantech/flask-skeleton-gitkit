@@ -43,5 +43,6 @@ def signed_in():
 def sign_out():
     logout_user()
     response = redirect(request.url_root)
-    gitkit.delete_token(response)
+    if not current_app.config.get('DEVELOPMENT', False):
+        gitkit.delete_token(response)
     return response
