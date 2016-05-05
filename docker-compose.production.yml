@@ -30,3 +30,4 @@ services:
       - app
     volumes:
       - ./nginx:/etc/nginx/conf.d
+      - ./data/static:/srv/com.klokantech.skeleton/static
