@@ -3,7 +3,6 @@ from flask.ext.login import login_user, logout_user
 from ..ext.identitytoolkit import Gitkit
 
 from ..model import Account, db
-from .base import app
 
 
 auth = Blueprint('auth', __name__)
@@ -12,7 +11,7 @@ gitkit = Gitkit(widget_endpoint='auth.sign_in')
 
 @auth.route('/sign-in', methods={'GET', 'POST'})
 def sign_in():
-    if current_app.config['DEVELOPMENT'] and request.method == 'POST':
+    if current_app.config.get('DEVELOPMENT', False) and request.method == 'POST':
         login_user(Account.query.filter_by(email=request.form['email']).one())
         return redirect(request.args.get('next', request.url_root))
     return render_template('auth/sign-in.html')

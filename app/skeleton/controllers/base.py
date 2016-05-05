@@ -4,7 +4,6 @@ from flask import Flask, redirect, request, url_for
 from flask.ext.babel import Babel
 from flask.ext.login import LoginManager, current_user
 from flask.ext.principal import Identity, Permission, PermissionDenied, Principal
-from sqlalchemy.orm.exc import NoResultFound
 from ..model import Account, db
 
 
@@ -50,8 +49,3 @@ def load_identity():
 @app.errorhandler(PermissionDenied)
 def permission_denied(exc):
     return 'Forbidden', 403
-
-
-@app.errorhandler(NoResultFound)
-def no_result_found(exc):
-    return 'Not Found', 404
