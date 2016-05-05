@@ -2,6 +2,7 @@ from os import environ
 
 DEBUG = environ.get('FLASK_DEBUG', False)
 DEVELOPMENT = environ.get('FLASK_DEVELOPMENT', False)
+PROPAGATE_EXCEPTIONS = True
 SECRET_KEY = environ['FLASK_SECRET_KEY']
 
 GITKIT_CLIENT_ID = environ['GITKIT_CLIENT_ID']
