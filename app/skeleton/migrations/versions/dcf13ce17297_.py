@@ -21,6 +21,7 @@ def upgrade():
         sa.Column('gitkit_id', sa.Text(), nullable=True),
         sa.Column('email', sa.Text(), nullable=False),
         sa.Column('email_verified', sa.Text(), nullable=False),
+        sa.Column('email_challenged', sa.DateTime()),
         sa.Column('name', sa.Text(), nullable=True),
         sa.Column('photo_url', sa.Text(), nullable=True),
         sa.Column('is_admin', sa.Boolean(), nullable=False),

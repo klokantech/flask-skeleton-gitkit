@@ -1,7 +1,8 @@
 from flask import render_template
 from flask.ext.login import login_required
 
-from .base import app, admin_role
+from .base import app
+from .auth import admin_permission
 
 
 @app.route('/')
@@ -17,6 +18,6 @@ def private():
 
 @app.route('/admin')
 @login_required
-@admin_role.require()
+@admin_permission.require()
 def admin():
     return render_template('admin.html')

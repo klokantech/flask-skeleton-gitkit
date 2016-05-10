@@ -15,6 +15,7 @@ services:
     restart: always
     environment:
       - FLASK_SECRET_KEY="<<< Production key >>>"
+      - GITKIT_API_KEY="<<< API key >>>"
       - GITKIT_CLIENT_ID="<<< Client ID >>>"
       - GITKIT_PROJECT_ID="<<< Project ID >>>"
       - GITKIT_SERVICE_ACCOUNT_EMAIL="<<< Service account email >>>"
