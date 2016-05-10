@@ -8,6 +8,8 @@ from flask import Flask, redirect, request, url_for
 from flask.ext.babel import Babel
 from flask.ext.login import LoginManager, current_user
 from flask.ext.principal import Identity, Permission, PermissionDenied, Principal
+from ..ext.mailgun import Mailgun
+
 from ..model import Account, db
 
 
@@ -17,6 +19,10 @@ app.config.from_object('{}.settings'.format(app.import_name))
 babel = Babel(app)
 login_manager = LoginManager(app)
 principal = Principal(app, use_sessions=False, skip_static=True)
+
+if not app.config['DEVELOPMENT']:
+    mailgun = Mailgun(app)
+
 
 admin_role = Permission('admin')
 

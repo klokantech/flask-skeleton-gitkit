@@ -23,6 +23,8 @@ services:
         Insert the encoded private key here. The '|' above is intentional.
         This is how you do big blocks of text in YAML.
         -----END PRIVATE KEY-----
+      - MAILGUN_KEY="<<< API key >>>"
+      - MAILGUN_DOMAIN="<<< Email domain >>>"
   nginx:
     image: klokantech/nginx
     ports:

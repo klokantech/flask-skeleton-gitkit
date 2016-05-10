@@ -7,4 +7,5 @@ Flask-Script
 Flask-SQLAlchemy
 Flask-WTF
 identity-toolkit-python-client
+requests
 uWSGI
