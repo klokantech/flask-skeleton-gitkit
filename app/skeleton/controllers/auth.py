@@ -33,7 +33,7 @@ def load_user(id):
 
 @login_manager.unauthorized_handler
 def authentication_required():
-    return redirect(auth_url_for('sign_in'))
+    return redirect(auth_url_for('widget', mode='select'))
 
 
 @principal.identity_loader
