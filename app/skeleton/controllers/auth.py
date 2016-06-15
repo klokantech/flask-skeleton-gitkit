@@ -117,7 +117,7 @@ def verify_email(id):
     return render_template('auth/verify-email.html', account=account)
 
 
-@blueprint.route('/oob-action')
+@blueprint.route('/oob-action', methods={'POST'})
 def oob_action():
     result = gitkit.get_oob_result()
     if result['action'] == 'changeEmail':
