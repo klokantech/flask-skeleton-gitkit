@@ -80,7 +80,9 @@ def sign_in_success():
     gitkit_account = gitkit.get_account_by_id(token['id'])
     account = Account.query.filter_by(gitkit_id=token['id']).one_or_none()
     if account is None:
-        account = Account(id=token['id'])
+        account = Account.query.filter_by(email=gitkit_account['email']).one_or_none()
+    if account is None:
+        account = Account(gitkit_id=token['id'])
         db.session.add(account)
     account.email = gitkit_account['email']
     account.email_verified = gitkit_account['email_verified']
@@ -110,7 +112,7 @@ def sign_out():
 
 @blueprint.route('/account/<id>/verify-email', methods={'GET', 'POST'})
 def verify_email(id):
-    account = Account.get_or_404(id)
+    account = Account.query.get_or_404(id)
     if request.method == 'POST' and not account.email_verified:
         send_email_challenge(account)
         db.session.commit()
