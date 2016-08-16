@@ -1,23 +1,31 @@
 import os
 import os.path
+import logging
 
 from functools import lru_cache, wraps
 from urllib.parse import urlparse
-
 from flask import Flask, request, url_for
 from flask.ext.babel import Babel
-from ..ext.mailgun import Mailgun
 
+from .ext.mailgun import Mailgun
+from .model import db, migrate
 
 app = Flask('skeleton')  # __NAME__
 app.config.from_object('{}.settings'.format(app.import_name))
 
+if app.config['LOG_FILE']:
+    logging.basicConfig(filename=app.config['LOG_FILE'], level=app.config['LOG_LEVEL'], format='%(asctime)s: %(levelname)s: %(message)s')
+else:
+    logging.basicConfig(level=app.config['LOG_LEVEL'], format='%(asctime)s: %(levelname)s: %(message)s')
 
 babel = Babel(app)
 if not app.config['DEVELOPMENT']:
     mailgun = Mailgun(app)
 else:
     mailgun = None
+
+db.init_app(app)
+migrate.init_app(app, db)
 
 
 def jsonp(func):

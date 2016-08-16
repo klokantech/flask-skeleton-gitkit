@@ -4,6 +4,8 @@ DEBUG = environ.get('FLASK_DEBUG', False)
 DEVELOPMENT = environ.get('FLASK_DEVELOPMENT', False)
 PROPAGATE_EXCEPTIONS = True
 SECRET_KEY = environ['FLASK_SECRET_KEY']
+LOG_FILE = environ.get('LOG_FILE', False)
+LOG_LEVEL = environ.get('LOG_LEVEL', 'WARNING')
 
 if not DEVELOPMENT:
     GITKIT_API_KEY = environ['GITKIT_API_KEY']

@@ -6,7 +6,7 @@ from flask.ext.principal import Identity, Permission, PermissionDenied, Principa
 from ..ext.identitytoolkit import Gitkit
 
 from ..model import Account, db
-from .base import app, mailgun
+from ..base import app, mailgun
 
 
 blueprint = Blueprint('auth', __name__)

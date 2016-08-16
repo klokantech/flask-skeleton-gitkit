@@ -1,2 +1,0 @@
-rm -rf app/skeleton/static/js  # __NAME__
-_development run --rm -e TARGET=/mnt javascript make build

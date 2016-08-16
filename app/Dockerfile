@@ -18,8 +18,5 @@ RUN python3 -m venv /venv \
 && /venv/bin/pip install -r /venv/requirements.txt \
 && /venv/bin/pip freeze > /venv/requirements-freezed.txt
 
-COPY . /venv/app
-
-ARG VERSION
-ARG SETUP_MODE
-RUN /venv/app/setup.sh $VERSION $SETUP_MODE
+WORKDIR /venv/src
+COPY . /venv/src

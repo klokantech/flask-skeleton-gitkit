@@ -2,7 +2,7 @@ version: "2"
 
 services:
   app:
-    image: klokantech/skeleton:$VERSION  # __NAME__
+    image: klokantech/skeleton  # __NAME__
     container_name: com.klokantech.skeleton  # __NAME__
     # __NAME__
     command: >
@@ -11,9 +11,11 @@ services:
         --uid nobody
         --enable-threads
         --socket 0.0.0.0:8000
+        --chdir /venv/src
         --wsgi skeleton:app
     restart: always
     environment:
+      - SQLALCHEMY_DATABASE_URI=sqlite:////mnt/database.sqlite
       - FLASK_SECRET_KEY="<<< Production key >>>"
       - GITKIT_API_KEY="<<< API key >>>"
       - GITKIT_CLIENT_ID="<<< Client ID >>>"
@@ -26,6 +28,8 @@ services:
         -----END PRIVATE KEY-----
       - MAILGUN_KEY="<<< API key >>>"
       - MAILGUN_DOMAIN="<<< Email domain >>>"
+      #~ - LOG_FILE=/var/log/skeleton.log # __NAME__
+      - LOG_LEVEL=WARNING
   nginx:
     image: klokantech/nginx
     ports:

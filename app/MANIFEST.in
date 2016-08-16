@@ -1,3 +1,0 @@
-graft skeleton/migrations  # __NAME__
-graft skeleton/static  # __NAME__
-graft skeleton/templates  # __NAME__

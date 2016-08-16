@@ -2,8 +2,25 @@ version: "2"
 
 services:
   app:
-    working_dir: /venv/app/skeleton  # __NAME__
+    build: ./app
+    image: klokantech/skeleton:app # __NAME__
+    command: /venv/bin/python manage.py runserver
     volumes:
       - ./data:/mnt
+      - ./app:/venv/src
+    ports:
+      - "8000:8000"
     environment:
       - SQLALCHEMY_DATABASE_URI=sqlite:////mnt/database.sqlite
+      - FLASK_DEBUG=true
+      - FLASK_DEVELOPMENT=true
+      - FLASK_SECRET_KEY="<<< Development key >>>"
+      - LOG_LEVEL=DEBUG
+  javascript:
+    image: klokantech/plovr:5.0.1
+    command: make serve
+    volumes:
+      - ./javascript:/data
+      - ./app/skeleton/static/js:/mnt  # __NAME__
+    ports:
+      - "9810:9810"
