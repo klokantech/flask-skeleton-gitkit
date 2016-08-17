@@ -13,10 +13,10 @@ from .model import db, migrate
 app = Flask('skeleton')  # __NAME__
 app.config.from_object('{}.settings'.format(app.import_name))
 
-if app.config['LOG_FILE']:
-    logging.basicConfig(filename=app.config['LOG_FILE'], level=app.config['LOG_LEVEL'], format='%(asctime)s: %(levelname)s: %(message)s')
-else:
-    logging.basicConfig(level=app.config['LOG_LEVEL'], format='%(asctime)s: %(levelname)s: %(message)s')
+logging.basicConfig(
+    filename=app.config.get('LOG_FILE'),
+    level=app.config.get('LOG_LEVEL', 'WARNING'),
+    format='%(asctime)s: %(levelname)s: %(message)s')
 
 babel = Babel(app)
 if not app.config['DEVELOPMENT']:
