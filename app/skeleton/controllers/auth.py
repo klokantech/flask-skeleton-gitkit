@@ -81,6 +81,8 @@ def sign_in_success():
     account = Account.query.filter_by(gitkit_id=token['id']).one_or_none()
     if account is None:
         account = Account.query.filter_by(email=gitkit_account['email']).one_or_none()
+        if account:
+            account.gitkit_id = token['id']
     if account is None:
         account = Account(gitkit_id=token['id'])
         db.session.add(account)
